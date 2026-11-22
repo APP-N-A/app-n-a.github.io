@@ -12,7 +12,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#17305A">
+<meta name="theme-color" content="#14482F">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -34,45 +34,45 @@
 
 /* ---------- Cores (tema claro) ---------- */
 :root{
-  --tinta:#17305A;        /* azul-noite: textos e títulos */
-  --tinta-2:#3D5680;      /* azul secundário */
-  --suave:#56657C;        /* textos de apoio */
-  --papel:#EDF1F6;        /* fundo */
-  --folha:#FFFFFF;        /* superfícies */
-  --linha:#D2DBE7;        /* bordas */
-  --bronze:#9A5E25;       /* destaque: o "livro bronze" */
-  --bronze-claro:#F4E6D6;
+  --tinta:#14482F;        /* verde N/A escuro: textos, títulos e botões */
+  --tinta-2:#2A6B4A;      /* verde secundário */
+  --suave:#54675C;        /* textos de apoio */
+  --papel:#F3F8F5;        /* fundo (branco esverdeado) */
+  --folha:#FFFFFF;        /* superfícies brancas */
+  --linha:#D3E3D9;        /* bordas */
+  --bronze:#23874F;       /* destaque verde (barras, números, indicadores) */
+  --bronze-claro:#E2F2E8;
   --ambar:#F0B243;        /* o sol: o marcador da sua posição */
-  --salvia:#2E7A5F;       /* lado da saúde / resposta Sim */
-  --salvia-claro:#DDEFE7;
+  --salvia:#1E8049;       /* lado da saúde / resposta Sim */
+  --salvia-claro:#DDF0E4;
   --ameixa:#7A4A6E;       /* lado da doença */
   --ameixa-claro:#F1E4EC;
-  --ardosia:#5B6B82;      /* resposta Não */
-  --ardosia-claro:#E4E9F0;
+  --ardosia:#5B6B78;      /* resposta Não */
+  --ardosia-claro:#E6ECEA;
   --meio:#B7782F;         /* resposta Às vezes */
   --meio-claro:#F7EAD8;
-  --noite:#17305A;        /* painel da tela de entrada */
+  --noite:#14482F;        /* painel verde da tela de entrada */
   --erro:#A23B3B;
   --base:18px;
   --raio-g:22px; --raio:14px; --raio-p:9px;
-  --sombra:0 1px 2px rgba(23,48,90,.06), 0 8px 24px rgba(23,48,90,.07);
+  --sombra:0 1px 2px rgba(20,72,47,.06), 0 8px 24px rgba(20,72,47,.08);
   --nav-h:68px;
   color-scheme:light;
 }
 /* ---------- Tema escuro ---------- */
 html[data-tema="escuro"]{
-  --tinta:#E6ECF5; --tinta-2:#B9C7DC; --suave:#9AA9BE; --papel:#0E1A2D; --folha:#16253D; --linha:#2A3B57;
-  --bronze:#D9A066; --bronze-claro:#3A2E22; --ambar:#F3BE58; --salvia:#62BB97; --salvia-claro:#173A2F;
-  --ameixa:#C58DB4; --ameixa-claro:#3A2436; --ardosia:#A3B1C6; --ardosia-claro:#24344D; --meio:#E0A45C; --meio-claro:#3B2D1C;
-  --noite:#0A1424; --erro:#E38080; --sombra:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+  --tinta:#E6F2EA; --tinta-2:#B3D5C1; --suave:#95AE9F; --papel:#0B1A13; --folha:#12261C; --linha:#24402F;
+  --bronze:#5CC48A; --bronze-claro:#173527; --ambar:#F3BE58; --salvia:#5FC08C; --salvia-claro:#163A28;
+  --ameixa:#C58DB4; --ameixa-claro:#3A2436; --ardosia:#A3B4AC; --ardosia-claro:#203A2D; --meio:#E0A45C; --meio-claro:#3B2D1C;
+  --noite:#08140E; --erro:#E38080; --sombra:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
   color-scheme:dark;
 }
 @media (prefers-color-scheme:dark){
   html[data-tema="auto"]{
-    --tinta:#E6ECF5; --tinta-2:#B9C7DC; --suave:#9AA9BE; --papel:#0E1A2D; --folha:#16253D; --linha:#2A3B57;
-    --bronze:#D9A066; --bronze-claro:#3A2E22; --ambar:#F3BE58; --salvia:#62BB97; --salvia-claro:#173A2F;
-    --ameixa:#C58DB4; --ameixa-claro:#3A2436; --ardosia:#A3B1C6; --ardosia-claro:#24344D; --meio:#E0A45C; --meio-claro:#3B2D1C;
-    --noite:#0A1424; --erro:#E38080; --sombra:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    --tinta:#E6F2EA; --tinta-2:#B3D5C1; --suave:#95AE9F; --papel:#0B1A13; --folha:#12261C; --linha:#24402F;
+    --bronze:#5CC48A; --bronze-claro:#173527; --ambar:#F3BE58; --salvia:#5FC08C; --salvia-claro:#163A28;
+    --ameixa:#C58DB4; --ameixa-claro:#3A2436; --ardosia:#A3B4AC; --ardosia-claro:#203A2D; --meio:#E0A45C; --meio-claro:#3B2D1C;
+    --noite:#08140E; --erro:#E38080; --sombra:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
     color-scheme:dark;
   }
 }
@@ -159,7 +159,7 @@ svg.ic{width:1.35em;height:1.35em;flex:none;stroke:currentColor;fill:none;stroke
 /* Seletor segmentado (tamanho da letra, tema, tratamento) */
 .segmentos{display:flex;gap:.35rem;background:var(--papel);border:1px solid var(--linha);padding:.3rem;border-radius:var(--raio)}
 .segmentos button{flex:1;border:0;background:transparent;border-radius:10px;padding:.65rem .4rem;cursor:pointer;font-weight:700;color:var(--suave);min-height:2.9rem}
-.segmentos button[aria-pressed="true"]{background:var(--folha);color:var(--tinta);box-shadow:0 1px 3px rgba(23,48,90,.15)}
+.segmentos button[aria-pressed="true"]{background:var(--folha);color:var(--tinta);box-shadow:0 1px 3px rgba(20,72,47,.15)}
 .opcao{margin-bottom:1.3rem}
 .opcao > .rot{font-weight:700;margin-bottom:.45rem;display:block}
 .opcao > .rot small{display:block;font-weight:400;color:var(--suave);font-size:.85rem}
@@ -182,7 +182,7 @@ svg.ic{width:1.35em;height:1.35em;flex:none;stroke:currentColor;fill:none;stroke
 .curva .polos .esq{color:var(--ameixa);font-weight:700}
 .curva .polos .dir{color:var(--salvia);font-weight:700;text-align:right}
 .curva .balao{position:absolute;transform:translate(-50%,-100%);background:var(--tinta);color:var(--papel);font-weight:700;font-size:.95rem;
-  padding:.2rem .6rem;border-radius:999px;white-space:nowrap;pointer-events:none;margin-top:-1.05rem;box-shadow:0 2px 8px rgba(23,48,90,.25)}
+  padding:.2rem .6rem;border-radius:999px;white-space:nowrap;pointer-events:none;margin-top:-1.05rem;box-shadow:0 2px 8px rgba(20,72,47,.25)}
 .curva .balao::after{content:"";position:absolute;left:50%;bottom:-5px;transform:translateX(-50%) rotate(45deg);width:9px;height:9px;background:var(--tinta)}
 .curva.interativa{cursor:pointer;touch-action:pan-y}
 .curva-sol{filter:drop-shadow(0 0 6px color-mix(in srgb,var(--ambar) 80%,transparent))}
@@ -192,9 +192,9 @@ svg.ic{width:1.35em;height:1.35em;flex:none;stroke:currentColor;fill:none;stroke
 #tela-login.ativa{display:flex}
 .app.modo-login{padding-bottom:0}
 #tela-login{flex-direction:column;min-height:100vh;min-height:100dvh;margin:-1.1rem -1.1rem 0}
-.horizonte{background:var(--noite);color:#EDF1F6;padding:calc(2.2rem + env(safe-area-inset-top)) 1.5rem 1.6rem;border-radius:0 0 28px 28px;position:relative;overflow:hidden}
-.horizonte h1{color:#F6F1E7;font-size:1.9rem;margin-top:1rem}
-.horizonte p{color:#C9D4E6;margin:.5rem 0 0;font-size:.98rem;max-width:26rem}
+.horizonte{background:var(--noite);color:#FFFFFF;padding:calc(2.2rem + env(safe-area-inset-top)) 1.5rem 1.6rem;border-radius:0 0 28px 28px;position:relative;overflow:hidden}
+.horizonte h1{color:#FFFFFF;font-size:1.9rem;margin-top:1rem}
+.horizonte p{color:#D6EBDD;margin:.5rem 0 0;font-size:.98rem;max-width:26rem}
 .horizonte .marca-curva{display:block;width:100%;height:auto;max-width:28rem}
 .form-login{padding:1.6rem 1.4rem 1rem;flex:1}
 .notas-login{font-size:.85rem;color:var(--suave);margin-top:1.1rem;display:flex;flex-direction:column;gap:.45rem}
@@ -295,7 +295,7 @@ svg.ic{width:1.35em;height:1.35em;flex:none;stroke:currentColor;fill:none;stroke
 .areas{display:flex;flex-direction:column;gap:.85rem}
 .area-linha .topo-area{display:flex;justify-content:space-between;gap:.6rem;font-weight:700;font-size:.95rem}
 .area-linha .topo-area span:last-child{color:var(--suave);font-weight:400;white-space:nowrap}
-.area-linha .barra > i{background:linear-gradient(90deg,var(--ameixa),var(--bronze) 55%,var(--salvia))}
+.area-linha .barra > i{background:linear-gradient(90deg,var(--ameixa),var(--meio) 50%,var(--salvia))}
 .area-linha small{display:block;color:var(--suave);font-size:.82rem;line-height:1.4;margin-top:.3rem}
 .refletir{list-style:none;margin:.6rem 0 0;padding:0;display:flex;flex-direction:column;gap:.6rem}
 .refletir li{border:1px solid var(--linha);border-radius:12px;padding:.75rem .85rem;background:var(--papel)}
@@ -346,7 +346,7 @@ input[type=range]{width:100%;accent-color:var(--bronze);height:2.2rem;margin-top
 .nav svg.ic{width:1.55rem;height:1.55rem}
 
 /* ---------- Janelas (modal) e avisos rápidos ---------- */
-.fundo-modal{position:fixed;inset:0;background:rgba(10,20,36,.55);z-index:50;display:flex;align-items:flex-end;justify-content:center;padding:0}
+.fundo-modal{position:fixed;inset:0;background:rgba(8,26,17,.55);z-index:50;display:flex;align-items:flex-end;justify-content:center;padding:0}
 .modal{background:var(--folha);width:100%;max-width:36rem;border-radius:22px 22px 0 0;padding:1.3rem 1.2rem calc(1.2rem + env(safe-area-inset-bottom));max-height:88vh;overflow:auto;animation:sobe .22s ease-out}
 @media (min-width:640px){.fundo-modal{align-items:center;padding:1rem}.modal{border-radius:22px}}
 @keyframes sobe{from{transform:translateY(30px);opacity:.4}to{transform:none;opacity:1}}
@@ -731,7 +731,7 @@ kbd{font-family:inherit;border:1px solid var(--linha);border-bottom-width:2px;bo
    - Respostas e resultados ficam apenas no aparelho (localStorage).
    ========================================================================== */
 "use strict";
-const VERSAO_APP = "1.0.0";
+const VERSAO_APP = "1.1.0";
 const TOTAL = 50;
 const VALOR = {s:2, a:1, n:0};
 const NOME_RESP = {s:"Sim", a:"Às vezes", n:"Não"};
@@ -792,7 +792,7 @@ function aplicarPrefs(){
   $$("[data-pref-chk]").forEach(chk=>{ chk.checked = !!estado.prefs[chk.dataset.prefChk]; });
   const escuro = estado.prefs.tema==="escuro" || (estado.prefs.tema==="auto" && matchMedia("(prefers-color-scheme: dark)").matches);
   const meta = document.querySelector('meta[name="theme-color"]');
-  if(meta) meta.content = escuro ? "#0A1424" : "#17305A";
+  if(meta) meta.content = escuro ? "#08140E" : "#14482F";
   aplicarTratamentoEstatico();
 }
 function salvarPrefs(){ LS.gravar("prefs", estado.prefs); aplicarPrefs(); }
@@ -997,7 +997,7 @@ function htmlCurva(op){
     <div class="area-svg"><svg viewBox="0 0 ${CV.W} ${CV.H}" role="img" aria-label="${v!=null?`Curva com a sua posição em ${v} de 100`:"Curva da distribuição da doença e da saúde mental e emocional"}">
       <defs>
         <linearGradient id="${u}g" x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0" style="stop-color:var(--ameixa)"/><stop offset=".5" style="stop-color:var(--bronze)"/><stop offset="1" style="stop-color:var(--salvia)"/>
+          <stop offset="0" style="stop-color:var(--ameixa)"/><stop offset=".5" style="stop-color:var(--meio)"/><stop offset="1" style="stop-color:var(--salvia)"/>
         </linearGradient>
         <clipPath id="${u}c"><rect class="corte" x="${CV.x0}" y="0" width="${v!=null? (cx(v)-CV.x0).toFixed(1) : 0}" height="${CV.H}"/></clipPath>
       </defs>
@@ -1069,15 +1069,15 @@ function desenharMarcaLogin(){
   let d=""; for(let v=0; v<=100; v+=0.5) d += (v?"L":"M")+X(v).toFixed(1)+" "+Y(v).toFixed(1)+" ";
   const sv = 84;
   svg.innerHTML = `<defs>
-      <linearGradient id="lgF" x1="0" x2="1"><stop offset="0" stop-color="#7A4A6E" stop-opacity=".55"/><stop offset=".55" stop-color="#9A5E25" stop-opacity=".55"/><stop offset="1" stop-color="#2E7A5F" stop-opacity=".7"/></linearGradient>
+      <linearGradient id="lgF" x1="0" x2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".06"/><stop offset=".55" stop-color="#FFFFFF" stop-opacity=".14"/><stop offset="1" stop-color="#7FD3A2" stop-opacity=".45"/></linearGradient>
       <radialGradient id="lgS"><stop offset="0" stop-color="#F7C964" stop-opacity=".95"/><stop offset=".45" stop-color="#F0B243" stop-opacity=".35"/><stop offset="1" stop-color="#F0B243" stop-opacity="0"/></radialGradient>
     </defs>
     <circle cx="${X(sv)}" cy="${Y(sv)}" r="70" fill="url(#lgS)"/>
     <path d="${d} L ${x1} ${base} L ${x0} ${base} Z" fill="url(#lgF)"/>
-    ${[25,50,75].map(p=>`<line x1="${X(p)}" y1="${base}" x2="${X(p)}" y2="${Y(p).toFixed(1)}" stroke="#EDF1F6" stroke-opacity=".35" stroke-width="2"/>`).join("")}
-    <line x1="0" y1="${base}" x2="600" y2="${base}" stroke="#EDF1F6" stroke-opacity=".5" stroke-width="2"/>
-    <path d="${d}" fill="none" stroke="#E9C38F" stroke-width="4" stroke-linecap="round"/>
-    <circle cx="${X(sv)}" cy="${Y(sv)}" r="13" fill="#F3BE58" stroke="#17305A" stroke-width="3"/>`;
+    ${[25,50,75].map(p=>`<line x1="${X(p)}" y1="${base}" x2="${X(p)}" y2="${Y(p).toFixed(1)}" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="2"/>`).join("")}
+    <line x1="0" y1="${base}" x2="600" y2="${base}" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2"/>
+    <path d="${d}" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="${X(sv)}" cy="${Y(sv)}" r="13" fill="#F3BE58" stroke="#14482F" stroke-width="3"/>`;
   svg.dataset.ok = "1";
 }
 
@@ -1556,13 +1556,13 @@ async function desenharImagem(reg){
   const W=1080, H=1350, c=document.createElement("canvas");
   c.width=W; c.height=H;
   const x = c.getContext("2d");
-  const cor = {tinta:"#17305A", papel:"#EDF1F6", bronze:"#9A5E25", ambar:"#F0B243", salvia:"#2E7A5F", ameixa:"#7A4A6E", suave:"#56657C", linha:"#D2DBE7"};
+  const cor = {tinta:"#14482F", papel:"#F3F8F5", meio:"#B7782F", ambar:"#F0B243", salvia:"#1E8049", ameixa:"#7A4A6E", suave:"#54675C", linha:"#D3E3D9"};
   x.fillStyle = cor.papel; x.fillRect(0,0,W,H);
   // faixa superior
   x.fillStyle = cor.tinta; x.fillRect(0,0,W,250);
-  x.fillStyle = "#F6F1E7"; x.font = '600 58px "Literata", Georgia, serif'; x.textBaseline = "alphabetic";
+  x.fillStyle = "#FFFFFF"; x.font = '600 58px "Literata", Georgia, serif'; x.textBaseline = "alphabetic";
   x.fillText("Minha posição na curva", 80, 130);
-  x.fillStyle = "#C9D4E6"; x.font = '400 32px "Atkinson Hyperlegible", Arial, sans-serif';
+  x.fillStyle = "#D6EBDD"; x.font = '400 32px "Atkinson Hyperlegible", Arial, sans-serif';
   x.fillText(fmtData(reg.data), 80, 190);
   // placar
   x.fillStyle = cor.tinta; x.font = '600 190px "Literata", Georgia, serif'; x.textAlign = "center";
@@ -1572,7 +1572,7 @@ async function desenharImagem(reg){
   // curva
   const L=90, R=990, B=930, T=640, s=18;
   const X = v=> L + (R-L)*v/100, Y = v=> B - (B-T)*Math.exp(-((v-50)**2)/(2*s*s));
-  const grad = x.createLinearGradient(L,0,R,0); grad.addColorStop(0,cor.ameixa); grad.addColorStop(.5,cor.bronze); grad.addColorStop(1,cor.salvia);
+  const grad = x.createLinearGradient(L,0,R,0); grad.addColorStop(0,cor.ameixa); grad.addColorStop(.5,cor.meio); grad.addColorStop(1,cor.salvia);
   const tracar = ()=>{ x.beginPath(); for(let v=0; v<=100; v+=0.5){ v ? x.lineTo(X(v),Y(v)) : x.moveTo(X(v),Y(v)); } };
   x.globalAlpha=.18; tracar(); x.lineTo(R,B); x.lineTo(L,B); x.closePath(); x.fillStyle=grad; x.fill();
   x.save(); x.beginPath(); x.rect(L,0,X(reg.pontos)-L,H); x.clip();

@@ -1,6 +1,6 @@
 /* Service worker: guarda o app no aparelho para funcionar sem internet.
    Ao publicar uma versão nova, aumente o número em VERSAO. */
-const VERSAO = "teste-na-v1.0.0";
+const VERSAO = "teste-na-v1.1.0";
 const ARQUIVOS = [
   "./", "index.html", "cofre.js", "manifest.json",
   "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-192.png", "icons/icon-maskable-512.png",
