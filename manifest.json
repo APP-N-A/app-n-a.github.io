@@ -1,0 +1,21 @@
+{
+  "name": "Teste de Saúde Mental e Emocional (N/A)",
+  "short_name": "Teste N/A",
+  "description": "Questionário de autoavaliação e curva do livro A Etiologia da Doença e da Saúde Mental e Emocional, de Neuróticos Anônimos.",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#17305A",
+  "theme_color": "#17305A",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["health", "lifestyle"],
+  "icons": [
+    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable"},
+    {"src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
