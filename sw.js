@@ -1,8 +1,8 @@
 /* Service worker: guarda o app no aparelho para funcionar sem internet.
    Ao publicar uma versão nova, aumente o número em VERSAO. */
-const VERSAO = "teste-na-v1.1.0";
+const VERSAO = "teste-na-v2.0.0";
 const ARQUIVOS = [
-  "./", "index.html", "cofre.js", "manifest.json",
+  "./", "index.html", "conteudo.js", "manifest.json",
   "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-192.png", "icons/icon-maskable-512.png",
   "icons/apple-touch-icon.png", "icons/favicon-32.png",
   "fonts/atkinson-hyperlegible-latin-400-normal.woff2", "fonts/atkinson-hyperlegible-latin-700-normal.woff2",

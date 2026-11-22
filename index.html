@@ -354,7 +354,6 @@ input[type=range]{width:100%;accent-color:var(--bronze);height:2.2rem;margin-top
 .toast{position:fixed;left:50%;bottom:calc(var(--nav-h) + 1rem + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--tinta);color:var(--papel);
   padding:.75rem 1.1rem;border-radius:12px;z-index:60;font-weight:700;max-width:calc(100% - 2rem);box-shadow:0 6px 20px rgba(0,0,0,.25);display:flex;gap:.8rem;align-items:center}
 .toast button{background:transparent;border:2px solid currentColor;color:inherit;border-radius:9px;padding:.3rem .7rem;font-weight:700;cursor:pointer}
-.saida-acesso{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.78rem;word-break:break-all;background:var(--papel);border:1px solid var(--linha);border-radius:10px;padding:.7rem;width:100%;min-height:6rem}
 .passos-instalar{padding-left:1.2rem;margin:.4rem 0 1rem}
 .passos-instalar li{margin-bottom:.45rem}
 kbd{font-family:inherit;border:1px solid var(--linha);border-bottom-width:2px;border-radius:6px;padding:0 .35rem;font-size:.85em;background:var(--papel)}
@@ -423,23 +422,31 @@ kbd{font-family:inherit;border:1px solid var(--linha);border-bottom-width:2px;bo
       <p>O questionário e a curva do livro <i>A Etiologia da Doença e da Saúde Mental e Emocional</i>, de Neuróticos Anônimos.</p>
     </div>
     <form class="form-login" id="formLogin" autocomplete="on" novalidate>
+      <h2 id="lgTitulo" style="margin-bottom:.35rem">Entrar</h2>
+      <p id="lgIntro" class="apoio" style="margin-bottom:1.1rem"></p>
       <div class="campo">
-        <label for="lgLogin">Login</label>
-        <input id="lgLogin" name="username" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required>
+        <label for="lgLogin">Login <span class="apoio" id="lgLoginDica"></span></label>
+        <input id="lgLogin" name="username" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="40" required>
       </div>
       <div class="campo">
-        <label for="lgSenha">Senha</label>
+        <label for="lgSenha">Senha <span class="apoio" id="lgSenhaDica"></span></label>
         <div class="senha-box">
           <input id="lgSenha" name="password" type="password" autocomplete="current-password" required>
           <button type="button" id="btnVerSenha" aria-controls="lgSenha" aria-pressed="false">Mostrar</button>
         </div>
       </div>
-      <label class="check"><input type="checkbox" id="lgLembrar" checked> <span>Manter conectado neste aparelho<br><small class="apoio">Desmarque se o celular for compartilhado.</small></span></label>
+      <div class="campo oculto" id="campoRepetir">
+        <label for="lgRepetir">Repita a senha</label>
+        <input id="lgRepetir" name="password-confirm" type="password" autocomplete="new-password">
+      </div>
+      <label class="check"><input type="checkbox" id="lgLembrar" checked> <span>Manter conectado neste aparelho<br><small class="apoio">Desmarque se o celular for usado por outras pessoas.</small></span></label>
+      <div id="lgAvisoCriar" class="aviso info oculto">Anote sua senha em lugar seguro. Ela não fica guardada em nenhum lugar; se for esquecida, os resultados deste aparelho não podem ser recuperados.</div>
       <div id="lgErro" role="alert"></div>
       <button class="btn largo" type="submit" id="btnEntrar">Entrar</button>
+      <p style="text-align:center;margin:.9rem 0 0"><button type="button" class="link oculto" id="lnkEsqueci">Esqueci minha senha</button></p>
       <div class="notas-login">
-        <span><svg class="ic" aria-hidden="true"><use href="#i-cadeado"/></svg>Acesso para membros. Peça o login e a senha no seu grupo.</span>
-        <span><svg class="ic" aria-hidden="true"><use href="#i-celular"/></svg>Suas respostas ficam guardadas só neste aparelho.</span>
+        <span><svg class="ic" aria-hidden="true"><use href="#i-cadeado"/></svg>Sem cadastro: seu login, sua senha e seus resultados ficam só neste aparelho.</span>
+        <span><svg class="ic" aria-hidden="true"><use href="#i-celular"/></svg>Ninguém mais tem acesso a eles, nem quem mantém o app.</span>
       </div>
     </form>
   </section>
@@ -564,8 +571,8 @@ kbd{font-family:inherit;border:1px solid var(--linha);border-bottom-width:2px;bo
     </div>
     <div class="lista-links">
       <button data-ir="#dados"><svg class="ic" aria-hidden="true"><use href="#i-pasta"/></svg><span class="txt">Meus dados<small>Cópia de segurança, trocar de celular, apagar</small></span><svg class="ic seta" aria-hidden="true"><use href="#i-seta"/></svg></button>
-      <button data-ir="#admin"><svg class="ic" aria-hidden="true"><use href="#i-chave"/></svg><span class="txt">Administrar acessos<small>Para quem cuida do app: criar logins e senhas</small></span><svg class="ic seta" aria-hidden="true"><use href="#i-seta"/></svg></button>
-      <button id="btnSair"><svg class="ic" aria-hidden="true"><use href="#i-sair"/></svg><span class="txt">Sair<small>Pede login e senha na próxima vez</small></span></button>
+      <button data-ir="#senha"><svg class="ic" aria-hidden="true"><use href="#i-chave"/></svg><span class="txt">Trocar minha senha<small>A senha deste aparelho</small></span><svg class="ic seta" aria-hidden="true"><use href="#i-seta"/></svg></button>
+      <button id="btnSair"><svg class="ic" aria-hidden="true"><use href="#i-sair"/></svg><span class="txt">Sair e bloquear<small>Pede a sua senha na próxima vez</small></span></button>
     </div>
     <p class="apoio pequeno" style="text-align:center" id="versaoApp"></p>
   </section>
@@ -631,7 +638,8 @@ kbd{font-family:inherit;border:1px solid var(--linha);border-bottom-width:2px;bo
       </div>
       <div class="bloco">
         <h3 style="margin-top:0">Privacidade</h3>
-        <p>Suas respostas, resultados e anotações ficam guardados <b>somente neste aparelho</b>. Nada é enviado para servidores, e o app não usa contadores de visita nem anúncios. O conteúdo do teste fica protegido por senha (cifrado), e só abre com um login válido.</p>
+        <p>Não existe cadastro, conta central nem servidor. O login e a senha são criados por você e ficam <b>somente neste aparelho</b>; a senha nem chega a ser guardada: ela serve para cifrar (trancar) seus resultados e anotações aqui mesmo. Ninguém mais tem acesso a esses dados, nem quem mantém o app.</p>
+        <p style="margin:0">O app não envia nada pela internet, não usa contadores de visita nem anúncios. Por isso, se a senha for esquecida ou o celular for perdido, os dados não podem ser recuperados; use a cópia de segurança em Mais &gt; Meus dados, se quiser guardar.</p>
       </div>
       <div class="bloco">
         <h3 style="margin-top:0">Um app independente</h3>
@@ -666,47 +674,31 @@ kbd{font-family:inherit;border:1px solid var(--linha);border-bottom-width:2px;bo
     <div class="topo"><button class="voltar" data-ir="#mais" aria-label="Voltar"><svg class="ic"><use href="#i-voltar"/></svg></button><h2 id="t-dados">Meus dados</h2></div>
     <div class="bloco">
       <h3>Cópia de segurança</h3>
-      <p class="apoio">Salva seus resultados e anotações num arquivo. Use para guardar ou para levar tudo para outro celular.</p>
+      <p class="apoio">Salva seus resultados e anotações num arquivo. Use para guardar ou para levar tudo para outro celular. Atenção: o arquivo não tem senha; guarde-o em lugar seguro.</p>
       <div class="botoes"><button class="btn" id="btnExportar">Salvar cópia</button><button class="btn sec" id="btnImportar">Restaurar cópia</button></div>
       <input type="file" id="arqImportar" accept="application/json,.json" class="oculto">
       <div id="avisoDados"></div>
     </div>
     <div class="bloco">
       <h3>Apagar</h3>
-      <p class="apoio">Remove todos os resultados, anotações e o teste em andamento deste aparelho. Não tem como desfazer.</p>
-      <button class="btn perigo" id="btnApagarTudo"><svg class="ic" aria-hidden="true"><use href="#i-lixo"/></svg>Apagar meus dados</button>
+      <p class="apoio">Remove todos os resultados, anotações e o teste em andamento deste aparelho. Seu login e sua senha continuam valendo. Não tem como desfazer.</p>
+      <button class="btn perigo" id="btnApagarTudo"><svg class="ic" aria-hidden="true"><use href="#i-lixo"/></svg>Apagar meus resultados</button>
+      <p class="apoio" style="margin-top:1.2rem">Para deixar o aparelho como se o app nunca tivesse sido usado, apague também o seu acesso (login e senha).</p>
+      <button class="btn perigo" id="btnApagarConta"><svg class="ic" aria-hidden="true"><use href="#i-lixo"/></svg>Apagar tudo, inclusive meu acesso</button>
     </div>
   </section>
 
-  <!-- Administrar acessos -->
-  <section class="tela" id="tela-admin" aria-labelledby="t-admin">
-    <div class="topo"><button class="voltar" data-ir="#mais" aria-label="Voltar"><svg class="ic"><use href="#i-voltar"/></svg></button><h2 id="t-admin">Administrar acessos</h2></div>
-    <div class="bloco">
-      <p>Aqui você cria um novo login e senha. O app gera uma linha de código; ela precisa ser colada no arquivo <b>cofre.js</b> do repositório no GitHub para passar a valer.</p>
-      <p class="apoio pequeno">Gerar a linha não libera nada sozinho: só quem tem acesso ao repositório consegue ativá-la.</p>
-    </div>
-    <form class="bloco" id="formAcesso" novalidate>
-      <div class="campo"><label for="acRotulo">Identificação <span class="apoio">(opcional, ex.: Grupo Esperança)</span></label><input id="acRotulo" type="text" maxlength="60"></div>
-      <div class="campo"><label for="acLogin">Novo login</label><input id="acLogin" type="text" autocomplete="off" autocapitalize="none" spellcheck="false"></div>
-      <div class="campo"><label for="acSenha">Nova senha <span class="apoio">(mínimo de 6 caracteres)</span></label><input id="acSenha" type="text" autocomplete="off" spellcheck="false"></div>
-      <div id="acErro" role="alert"></div>
-      <button class="btn largo" type="submit" id="btnGerarAcesso">Gerar linha do acesso</button>
+  <!-- Trocar senha -->
+  <section class="tela" id="tela-senha" aria-labelledby="t-senha">
+    <div class="topo"><button class="voltar" data-ir="#mais" aria-label="Voltar"><svg class="ic"><use href="#i-voltar"/></svg></button><h2 id="t-senha">Trocar minha senha</h2></div>
+    <form class="bloco" id="formSenha" novalidate>
+      <p class="apoio">A senha só existe neste aparelho. Trocar aqui não afeta mais ninguém.</p>
+      <div class="campo"><label for="snAtual">Senha atual</label><input id="snAtual" type="password" autocomplete="current-password"></div>
+      <div class="campo"><label for="snNova">Nova senha <span class="apoio">(pelo menos 4 caracteres)</span></label><input id="snNova" type="password" autocomplete="new-password"></div>
+      <div class="campo"><label for="snRepetir">Repita a nova senha</label><input id="snRepetir" type="password" autocomplete="new-password"></div>
+      <div id="snErro" role="alert"></div>
+      <button class="btn largo" type="submit" id="btnTrocarSenha">Trocar senha</button>
     </form>
-    <div class="bloco oculto" id="blocoSaidaAcesso">
-      <h3>Linha gerada</h3>
-      <textarea class="saida-acesso" id="saidaAcesso" readonly aria-label="Linha do acesso para colar no cofre.js"></textarea>
-      <div class="botoes"><button class="btn" id="btnCopiarAcesso">Copiar linha</button><a class="btn sec" id="lnkEditarCofre" target="_blank" rel="noopener">Abrir cofre.js no GitHub</a></div>
-      <ol class="passos-instalar" style="margin-top:1rem">
-        <li>Toque em <b>Copiar linha</b> e depois em <b>Abrir cofre.js no GitHub</b> (é preciso estar conectado à conta que administra o app).</li>
-        <li>No editor, cole a linha logo abaixo de <code>"acessos": [</code>, numa linha nova. Ela já termina com vírgula.</li>
-        <li>Salve com <b>Commit changes</b>. Em um ou dois minutos o novo login passa a funcionar.</li>
-        <li>Para remover um acesso, apague a linha correspondente (confira pela identificação).</li>
-      </ol>
-    </div>
-    <div class="bloco">
-      <h3>Acessos ativos</h3>
-      <div id="listaAcessos" class="apoio"></div>
-    </div>
   </section>
 
 </div>
@@ -723,15 +715,15 @@ kbd{font-family:inherit;border:1px solid var(--linha);border-bottom-width:2px;bo
 <div id="camadaModal"></div>
 <div id="camadaToast" aria-live="polite"></div>
 
-<script src="cofre.js"></script>
+<script src="conteudo.js"></script>
 <script>
 /* ==========================================================================
    Teste de Saúde Mental e Emocional (N/A) — app de arquivo único, sem servidor.
-   - O conteúdo do teste vem cifrado em cofre.js e só abre com login e senha.
-   - Respostas e resultados ficam apenas no aparelho (localStorage).
+   - Sem cadastro nem servidor: cada pessoa cria login e senha no próprio aparelho.
+   - Resultados ficam só no aparelho, cifrados com uma chave derivada da senha.
    ========================================================================== */
 "use strict";
-const VERSAO_APP = "1.1.0";
+const VERSAO_APP = "2.0.0";
 const TOTAL = 50;
 const VALOR = {s:2, a:1, n:0};
 const NOME_RESP = {s:"Sim", a:"Às vezes", n:"Não"};
@@ -763,9 +755,9 @@ const PREFS_PADRAO = {fonte:"grande", tema:"auto", tratamento:"n", autoLeitura:f
 const estado = {
   conteudo:null, chave:null, itens:[], areas:{},
   prefs: Object.assign({}, PREFS_PADRAO, LS.ler("prefs", {})),
-  andamento: LS.ler("andamento", null),   // {inicio, respostas:{n:"s|a|n"}, atual}
-  historico: LS.ler("historico", []),      // [{id,data,respostas,pontos,sim,asvezes,nao,nota,versaoConteudo}]
-  foco: LS.ler("foco", null),              // {item, desde, dias:[YYYY-MM-DD]}
+  andamento: null,   // {inicio, respostas:{n:"s|a|n"}, atual}
+  historico: [],     // [{id,data,respostas,pontos,sim,asvezes,nao,nota,versaoConteudo}]
+  foco: null,        // {item, desde, dias:[YYYY-MM-DD]}
   idx: 0,
   rotaAnterior: "#inicio",
   instalarEvento: null
@@ -853,88 +845,151 @@ function confirmar(titulo, texto, rotuloSim, perigo){
 }
 
 /* ==========================================================================
-   COFRE: login e senha abrem o conteúdo cifrado (PBKDF2-SHA256 + AES-256-GCM)
+   ACESSO LOCAL: login e senha criados e guardados só neste aparelho.
+   A senha nunca é armazenada. Dela se deriva uma chave (PBKDF2-SHA256,
+   310 mil iterações) que cifra os dados da pessoa (AES-256-GCM).
+   Não há cadastro, servidor nem lista central de usuários.
    ========================================================================== */
+const ITERACOES = 310000;
 const cod = new TextEncoder(), decod = new TextDecoder();
 function b64paraBytes(s){ const bin = atob(s); const u = new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return u; }
 function bytesParaB64(u){ let s=""; for(let i=0;i<u.length;i++) s+=String.fromCharCode(u[i]); return btoa(s); }
 function normLogin(l){ return String(l||"").trim().normalize("NFC").toLowerCase(); }
-async function idDoLogin(loginNorm){
-  const h = await crypto.subtle.digest("SHA-256", cod.encode("na-cofre-v1|"+loginNorm));
-  return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,"0")).join("").slice(0,32);
+function contaLocal(){ const c = LS.ler("conta", null); return c && c.sal && c.login ? c : null; }
+async function derivarChaveLocal(loginNorm, senha, sal, iteracoes){
+  const base = await crypto.subtle.importKey("raw", cod.encode(loginNorm + "\u0000" + String(senha).normalize("NFC")), "PBKDF2", false, ["deriveBits"]);
+  return new Uint8Array(await crypto.subtle.deriveBits({name:"PBKDF2", hash:"SHA-256", salt:sal, iterations:iteracoes}, base, 256));
 }
-async function derivarChave(loginNorm, senha, sal, iteracoes){
-  const base = await crypto.subtle.importKey("raw", cod.encode(loginNorm + "\u0000" + String(senha).normalize("NFC")), "PBKDF2", false, ["deriveKey"]);
-  return crypto.subtle.deriveKey({name:"PBKDF2", hash:"SHA-256", salt:sal, iterations:iteracoes}, base, {name:"AES-GCM", length:256}, false, ["encrypt","decrypt"]);
+async function chaveAES(bytes){ return crypto.subtle.importKey("raw", bytes, "AES-GCM", false, ["encrypt","decrypt"]); }
+async function cifrar(obj, chaveBytes){
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ct = await crypto.subtle.encrypt({name:"AES-GCM", iv}, await chaveAES(chaveBytes), cod.encode(JSON.stringify(obj)));
+  return {iv: bytesParaB64(iv), dados: bytesParaB64(new Uint8Array(ct))};
 }
-async function abrirConteudo(chaveBytes){
-  const k = await crypto.subtle.importKey("raw", chaveBytes, "AES-GCM", false, ["decrypt"]);
-  const claro = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64paraBytes(COFRE.conteudo.iv)}, k, b64paraBytes(COFRE.conteudo.dados));
+async function decifrar(pacote, chaveBytes){
+  const claro = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64paraBytes(pacote.iv)}, await chaveAES(chaveBytes), b64paraBytes(pacote.dados));
   return JSON.parse(decod.decode(claro));
 }
-async function entrarComSenha(login, senha){
-  const l = normLogin(login);
-  const id = await idDoLogin(l);
-  const ac = (COFRE.acessos||[]).find(a=>a && a.id===id);
-  const sal = ac ? b64paraBytes(ac.sal) : crypto.getRandomValues(new Uint8Array(16));
-  const kek = await derivarChave(l, senha, sal, COFRE.iteracoes);   // sempre deriva: mesmo tempo com ou sem login válido
-  if(!ac) throw new Error("credencial");
-  let chave;
-  try{ chave = new Uint8Array(await crypto.subtle.decrypt({name:"AES-GCM", iv:b64paraBytes(ac.iv)}, kek, b64paraBytes(ac.chave))); }
-  catch(e){ throw new Error("credencial"); }
-  const conteudo = await abrirConteudo(chave);
-  return {chave, conteudo};
+function prepararConteudo(){
+  const c = window.CONTEUDO;
+  estado.conteudo = c; estado.itens = c.itens; estado.areas = {};
+  c.areas.forEach(a=> estado.areas[a.id] = a);
 }
-function prepararConteudo(conteudo, chave){
-  estado.conteudo = conteudo; estado.chave = chave;
-  estado.itens = conteudo.itens;
-  estado.areas = {};
-  conteudo.areas.forEach(a=> estado.areas[a.id] = a);
+function aplicarDados(d){
+  d = d || {};
+  estado.historico = Array.isArray(d.historico) ? d.historico : [];
+  estado.andamento = d.andamento && typeof d.andamento==="object" ? d.andamento : null;
+  estado.foco = d.foco && typeof d.foco==="object" ? d.foco : null;
+}
+/* Grava os dados (cifrados) em fila, para que nenhuma gravação passe na frente de outra */
+let filaGravacao = Promise.resolve(true);
+function salvarDados(){
+  if(!estado.chave) return Promise.resolve(false);
+  const chave = estado.chave;
+  filaGravacao = filaGravacao.then(async ()=>{
+    const pacote = await cifrar({historico:estado.historico, andamento:estado.andamento, foco:estado.foco}, chave);
+    return LS.gravar("dados", pacote);
+  }).catch(()=>{ toast("Não foi possível salvar neste aparelho."); return false; });
+  return filaGravacao;
 }
 function guardarChave(chave, lembrar){
   const b = bytesParaB64(chave);
   try{
-    if(lembrar){ localStorage.setItem("na.chave", b); sessionStorage.removeItem("na.chave"); }
-    else { sessionStorage.setItem("na.chave", b); localStorage.removeItem("na.chave"); }
+    if(lembrar){ localStorage.setItem("na.chaveLocal", b); sessionStorage.removeItem("na.chaveLocal"); }
+    else { sessionStorage.setItem("na.chaveLocal", b); localStorage.removeItem("na.chaveLocal"); }
   }catch(e){}
+}
+function esquecerChave(){ try{ localStorage.removeItem("na.chaveLocal"); sessionStorage.removeItem("na.chaveLocal"); }catch(e){} }
+function chaveLembrada(){ try{ return localStorage.getItem("na.chaveLocal") !== null; }catch(e){ return false; } }
+async function criarConta(login, senha, lembrar){
+  const sal = crypto.getRandomValues(new Uint8Array(16));
+  const chave = await derivarChaveLocal(normLogin(login), senha, sal, ITERACOES);
+  // Traz resultados de versões antigas do app (guardados sem senha), se houver
+  const antigos = {historico: LS.ler("historico", []), andamento: LS.ler("andamento", null), foco: LS.ler("foco", null)};
+  const conta = {versao:1, login:String(login).trim(), sal:bytesParaB64(sal), iteracoes:ITERACOES, criadaEm:new Date().toISOString()};
+  if(!LS.gravar("dados", await cifrar(antigos, chave)) || !LS.gravar("conta", conta)) throw new Error("armazenamento");
+  ["historico","andamento","foco","chave"].forEach(k=>LS.remover(k));
+  aplicarDados(antigos);
+  estado.chave = chave;
+  guardarChave(chave, lembrar);
+}
+async function entrarLocal(login, senha){
+  const conta = contaLocal();
+  const pacote = LS.ler("dados", null);
+  if(!conta || !pacote) throw new Error("sem-conta");
+  const chave = await derivarChaveLocal(normLogin(login), senha, b64paraBytes(conta.sal), conta.iteracoes || ITERACOES);
+  let dados;
+  try{ dados = await decifrar(pacote, chave); }catch(e){ throw new Error("credencial"); }
+  aplicarDados(dados);
+  estado.chave = chave;
+  return chave;
 }
 async function tentarSessaoSalva(){
   let b = null;
-  try{ b = sessionStorage.getItem("na.chave") || localStorage.getItem("na.chave"); }catch(e){}
-  if(!b) return false;
+  try{ b = sessionStorage.getItem("na.chaveLocal") || localStorage.getItem("na.chaveLocal"); }catch(e){}
+  const pacote = LS.ler("dados", null);
+  if(!b || !pacote || !contaLocal()) return false;
   try{
     const chave = b64paraBytes(b);
-    prepararConteudo(await abrirConteudo(chave), chave);
+    aplicarDados(await decifrar(pacote, chave));
+    estado.chave = chave;
     return true;
-  }catch(e){
-    try{ localStorage.removeItem("na.chave"); sessionStorage.removeItem("na.chave"); }catch(_){}
-    return false;
-  }
+  }catch(e){ esquecerChave(); return false; }
 }
+function limparMemoria(){ estado.chave = null; aplicarDados(null); }
 function sair(){
-  try{ localStorage.removeItem("na.chave"); sessionStorage.removeItem("na.chave"); }catch(e){}
-  estado.conteudo = null; estado.chave = null; estado.itens = []; estado.areas = {};
-  pararVoz();
-  location.hash = "";
+  esquecerChave(); limparMemoria(); pararVoz();
+  history.replaceState(null, "", location.pathname);
   mostrarLogin();
 }
+function apagarConta(){
+  ["conta","dados","historico","andamento","foco","chave"].forEach(k=>LS.remover(k));
+  esquecerChave(); limparMemoria(); pararVoz();
+  history.replaceState(null, "", location.pathname);
+}
 
-/* ---------------- Tela de entrada ---------------- */
-let falhas = 0, bloqueadoAte = 0, timerBloqueio = null;
+/* ---------------- Tela de entrada (criar acesso ou entrar) ---------------- */
+let falhas = 0, bloqueadoAte = 0, timerBloqueio = null, modoLogin = "entrar";
+function rotuloBotaoLogin(){ return modoLogin==="criar" ? "Criar meu acesso" : "Entrar"; }
 function mostrarLogin(){
   $("#nav").classList.add("oculto");
   $("#app").classList.add("modo-login");
-  if(Date.now() >= bloqueadoAte){ const b = $("#btnEntrar"); b.disabled = false; b.textContent = "Entrar"; }
+  const conta = contaLocal();
+  modoLogin = conta ? "entrar" : "criar";
+  const criar = modoLogin === "criar";
+  $("#lgTitulo").textContent = criar ? "Crie seu acesso" : "Entrar";
+  $("#lgIntro").textContent = criar
+    ? "Escolha um login (pode ser seu primeiro nome ou um apelido) e uma senha. Eles ficam guardados só neste aparelho e protegem os seus resultados."
+    : "Digite a senha que você criou neste aparelho.";
+  $("#lgLoginDica").textContent = criar ? "(nome ou apelido)" : "";
+  $("#lgSenhaDica").textContent = criar ? "(pelo menos 4 caracteres)" : "";
+  $("#campoRepetir").classList.toggle("oculto", !criar);
+  $("#lgAvisoCriar").classList.toggle("oculto", !criar);
+  $("#lnkEsqueci").classList.toggle("oculto", criar);
+  $("#lgSenha").setAttribute("autocomplete", criar ? "new-password" : "current-password");
+  if(!criar && conta && !$("#lgLogin").value) $("#lgLogin").value = conta.login;
+  if(criar){ $("#lgLogin").value = ""; }
+  $("#lgSenha").value = ""; $("#lgRepetir").value = "";
+  $("#lgErro").innerHTML = "";
+  if(Date.now() >= bloqueadoAte){ const b = $("#btnEntrar"); b.disabled = false; b.textContent = rotuloBotaoLogin(); }
   $$(".tela").forEach(t=>t.classList.remove("ativa"));
   $("#tela-login").classList.add("ativa");
   desenharMarcaLogin();
-  setTimeout(()=>{ const i = $("#lgLogin"); if(i && !i.value) i.focus(); }, 60);
+  setTimeout(()=>{ const alvo = criar || !$("#lgLogin").value ? $("#lgLogin") : $("#lgSenha"); if(alvo) alvo.focus(); }, 60);
 }
 $("#btnVerSenha").addEventListener("click", ()=>{
-  const i = $("#lgSenha"); const mostrar = i.type==="password";
-  i.type = mostrar ? "text" : "password";
+  const mostrar = $("#lgSenha").type==="password";
+  ["#lgSenha","#lgRepetir"].forEach(id=> $(id).type = mostrar ? "text" : "password");
   $("#btnVerSenha").textContent = mostrar ? "Ocultar" : "Mostrar";
   $("#btnVerSenha").setAttribute("aria-pressed", String(mostrar));
+});
+$("#lnkEsqueci").addEventListener("click", async ()=>{
+  if(await confirmar("Esqueceu a senha?",
+    "Como a senha não fica guardada em lugar nenhum, não há como recuperá-la. Você pode apagar o acesso e os resultados deste aparelho e começar de novo, com um login e uma senha novos.",
+    "Apagar e começar de novo", true)){
+    apagarConta(); falhas = 0; mostrarLogin();
+    toast("Pronto. Crie um novo acesso.");
+  }
 });
 $("#formLogin").addEventListener("submit", async e=>{
   e.preventDefault();
@@ -942,35 +997,85 @@ $("#formLogin").addEventListener("submit", async e=>{
   erro.innerHTML = "";
   if(Date.now() < bloqueadoAte) return;
   const login = $("#lgLogin").value, senha = $("#lgSenha").value;
-  if(!login.trim() || !senha){ erro.innerHTML = `<div class="aviso erro">Preencha o login e a senha.</div>`; return; }
-  if(!window.crypto || !crypto.subtle){ erro.innerHTML = `<div class="aviso erro">Este navegador não consegue abrir o conteúdo protegido. Abra o app pelo endereço https:// no Chrome ou no Safari atualizados.</div>`; return; }
-  if(typeof COFRE==="undefined"){ erro.innerHTML = `<div class="aviso erro">O arquivo do conteúdo (cofre.js) não carregou. Verifique a internet e abra o app de novo.</div>`; return; }
+  const falha = msg=>{ erro.innerHTML = `<div class="aviso erro">${msg}</div>`; };
+  if(!window.crypto || !crypto.subtle) return falha("Este navegador não consegue proteger os dados. Abra o app pelo endereço https:// no Chrome ou no Safari atualizados.");
+  if(typeof CONTEUDO==="undefined") return falha("O arquivo do teste (conteudo.js) não carregou. Verifique a internet e abra o app de novo.");
+  if(!login.trim()) return falha("Preencha o login.");
+  if(!senha) return falha("Preencha a senha.");
+  if(modoLogin === "criar"){
+    if(senha.length < 4) return falha("A senha precisa ter pelo menos 4 caracteres.");
+    if(senha !== $("#lgRepetir").value) return falha("As duas senhas não são iguais. Digite de novo.");
+    btn.disabled = true; btn.innerHTML = `<span class="girando" aria-hidden="true"></span> Criando…`;
+    try{
+      await criarConta(login, senha, $("#lgLembrar").checked);
+      $("#lgSenha").value = ""; $("#lgRepetir").value = "";
+      iniciarApp();
+      toast("Acesso criado. Ele vale só para este aparelho.");
+    }catch(err){
+      falha("Não foi possível criar o acesso: a memória do navegador está cheia ou bloqueada (modo anônimo). Abra o app numa janela normal.");
+    }
+    btn.disabled = false; btn.textContent = rotuloBotaoLogin();
+    return;
+  }
   btn.disabled = true; btn.innerHTML = `<span class="girando" aria-hidden="true"></span> Conferindo…`;
   try{
-    const {chave, conteudo} = await entrarComSenha(login, senha);
-    prepararConteudo(conteudo, chave);
+    const chave = await entrarLocal(login, senha);
     guardarChave(chave, $("#lgLembrar").checked);
     falhas = 0;
     $("#lgSenha").value = "";
     iniciarApp();
   }catch(err){
+    if(err && err.message === "sem-conta"){ mostrarLogin(); return; }
     falhas++;
     if(falhas >= 5){
       bloqueadoAte = Date.now() + 30000;
       const tick = ()=>{
         const s = Math.ceil((bloqueadoAte - Date.now())/1000);
-        if(s<=0){ clearInterval(timerBloqueio); erro.innerHTML=""; btn.disabled=false; btn.textContent="Entrar"; falhas = 3; return; }
+        if(s<=0){ clearInterval(timerBloqueio); erro.innerHTML=""; btn.disabled=false; btn.textContent=rotuloBotaoLogin(); falhas = 3; return; }
         erro.innerHTML = `<div class="aviso erro">Muitas tentativas. Aguarde ${s} segundos para tentar de novo.</div>`;
       };
       clearInterval(timerBloqueio); timerBloqueio = setInterval(tick, 1000); tick();
       btn.textContent = "Aguarde";
       return;
     }
-    erro.innerHTML = err && err.message==="credencial"
-      ? `<div class="aviso erro">Login ou senha não conferem. Confira as letras maiúsculas e minúsculas da senha e tente de novo.</div>`
-      : `<div class="aviso erro">Não foi possível abrir o conteúdo. Atualize a página e tente de novo.</div>`;
+    falha(err && err.message==="credencial"
+      ? "Login ou senha não conferem. Confira as letras maiúsculas e minúsculas da senha e tente de novo."
+      : "Não foi possível abrir seus dados. Atualize a página e tente de novo.");
   }
-  if(Date.now() >= bloqueadoAte){ btn.disabled = false; btn.textContent = "Entrar"; }
+  if(Date.now() >= bloqueadoAte){ btn.disabled = false; btn.textContent = rotuloBotaoLogin(); }
+});
+
+/* ---------------- Trocar senha ---------------- */
+$("#formSenha").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const erro = $("#snErro"); erro.innerHTML = "";
+  const falha = msg=>{ erro.innerHTML = `<div class="aviso erro">${msg}</div>`; };
+  const atual = $("#snAtual").value, nova = $("#snNova").value, rep = $("#snRepetir").value;
+  const conta = contaLocal();
+  if(!conta || !estado.chave) return falha("Entre no app de novo para trocar a senha.");
+  if(!atual) return falha("Digite a senha atual.");
+  if(nova.length < 4) return falha("A nova senha precisa ter pelo menos 4 caracteres.");
+  if(nova !== rep) return falha("As duas novas senhas não são iguais.");
+  const btn = $("#btnTrocarSenha"); btn.disabled = true; btn.innerHTML = `<span class="girando" aria-hidden="true"></span> Trocando…`;
+  try{
+    const l = normLogin(conta.login);
+    const chaveAtual = await derivarChaveLocal(l, atual, b64paraBytes(conta.sal), conta.iteracoes || ITERACOES);
+    try{ await decifrar(LS.ler("dados", null), chaveAtual); }catch(_){ throw new Error("credencial"); }
+    await filaGravacao;
+    const sal = crypto.getRandomValues(new Uint8Array(16));
+    const chaveNova = await derivarChaveLocal(l, nova, sal, ITERACOES);
+    const pacote = await cifrar({historico:estado.historico, andamento:estado.andamento, foco:estado.foco}, chaveNova);
+    if(!LS.gravar("dados", pacote)) throw new Error("armazenamento");
+    LS.gravar("conta", Object.assign({}, conta, {sal:bytesParaB64(sal), iteracoes:ITERACOES}));
+    estado.chave = chaveNova;
+    guardarChave(chaveNova, chaveLembrada());
+    ["#snAtual","#snNova","#snRepetir"].forEach(id=> $(id).value = "");
+    toast("Senha trocada.");
+    irPara("#mais");
+  }catch(err){
+    falha(err && err.message==="credencial" ? "A senha atual não confere." : "Não foi possível trocar a senha neste aparelho.");
+  }
+  btn.disabled = false; btn.textContent = "Trocar senha";
 });
 
 /* ==========================================================================
@@ -1101,14 +1206,14 @@ function zona(p){
 const ROTAS = {
   inicio: renderInicio, antes: renderAntes, teste: renderTeste, resultado: renderResultado,
   historico: renderHistorico, entenda: renderEntenda, mais: renderMais, ajustes: ()=>{}, instalar: renderInstalar,
-  sobre: ()=>{}, ajuda: ()=>{}, dados: ()=>{}, admin: renderAdmin
+  sobre: ()=>{}, ajuda: ()=>{}, dados: ()=>{}, senha: ()=>{ $("#snErro").innerHTML = ""; }
 };
 const NAV_DE = {inicio:"inicio", antes:"teste", teste:"teste", resultado:"historico", historico:"historico", entenda:"inicio",
-  mais:"mais", ajustes:"mais", instalar:"mais", sobre:"mais", ajuda:"mais", dados:"mais", admin:"mais"};
+  mais:"mais", ajustes:"mais", instalar:"mais", sobre:"mais", ajuda:"mais", dados:"mais", senha:"mais"};
 let rotaAtual = "";
 function irPara(hash){ if(location.hash === hash) rotear(); else location.hash = hash; }
 function rotear(){
-  if(!estado.conteudo){ mostrarLogin(); return; }
+  if(!estado.chave){ mostrarLogin(); return; }
   const h = (location.hash || "#inicio").slice(1);
   const [nome, param] = h.split("/");
   const rota = ROTAS[nome] ? nome : "inicio";
@@ -1187,7 +1292,7 @@ function renderInicio(){
   const rec = $("#btnRecomecar");
   if(rec) rec.onclick = async ()=>{
     if(await confirmar("Recomeçar o teste?", "As respostas deste teste em andamento serão apagadas. Seus resultados anteriores continuam guardados.", "Recomeçar", true)){
-      estado.andamento = null; LS.remover("andamento"); irPara("#antes");
+      estado.andamento = null; salvarDados(); irPara("#antes");
     }
   };
   const novo = $("#btnNovoTeste"); if(novo) novo.onclick = ()=> irPara("#antes");
@@ -1211,10 +1316,10 @@ function renderFoco(){
     </div>
   </div>`;
   const b = $("#btnFocoHoje");
-  if(b && !feitoHoje) b.onclick = ()=>{ f.dias = (f.dias||[]).concat(hojeISO()); LS.gravar("foco", f); vibrar(); toast("Marcado. Um dia de cada vez."); renderFoco(); };
+  if(b && !feitoHoje) b.onclick = ()=>{ f.dias = (f.dias||[]).concat(hojeISO()); salvarDados(); vibrar(); toast("Marcado. Um dia de cada vez."); renderFoco(); };
   $("#btnFocoTirar").onclick = async ()=>{
     if(await confirmar("Tirar este foco?", "Você pode escolher outra frase na tela de resultado, em \"Para refletir\".", "Tirar o foco")){
-      estado.foco = null; LS.remover("foco"); renderFoco();
+      estado.foco = null; salvarDados(); renderFoco();
     }
   };
 }
@@ -1228,7 +1333,7 @@ function renderAntes(){
 }
 $("#btnComecar").addEventListener("click", ()=>{
   if(!estado.andamento) estado.andamento = {inicio:new Date().toISOString(), respostas:{}, atual:0};
-  LS.gravar("andamento", estado.andamento);
+  salvarDados();
   falar("");  // libera a voz no iPhone (precisa de um toque antes)
   irPara("#teste");
 });
@@ -1237,7 +1342,7 @@ $("#btnComecar").addEventListener("click", ()=>{
    TESTE
    ========================================================================== */
 function renderTeste(){
-  if(!estado.andamento){ estado.andamento = {inicio:new Date().toISOString(), respostas:{}, atual:0}; LS.gravar("andamento", estado.andamento); }
+  if(!estado.andamento){ estado.andamento = {inicio:new Date().toISOString(), respostas:{}, atual:0}; salvarDados(); }
   const atual = Math.min(TOTAL-1, Math.max(0, estado.andamento.atual|0));
   $("#areaFim").classList.add("oculto");
   $("#areaItem").classList.remove("oculto");
@@ -1256,7 +1361,7 @@ function atualizarProgresso(){
 }
 function mostrarItem(i, direcao){
   estado.idx = i;
-  if(estado.andamento){ estado.andamento.atual = i; LS.gravar("andamento", estado.andamento); }
+  if(estado.andamento && estado.andamento.atual !== i){ estado.andamento.atual = i; salvarDados(); }
   const item = estado.itens[i];
   const cartao = $("#cartaoItem");
   const preencher = ()=>{
@@ -1285,7 +1390,7 @@ function responder(v){
   if(!estado.andamento) return;
   const item = estado.itens[estado.idx];
   estado.andamento.respostas[item.n] = v;
-  LS.gravar("andamento", estado.andamento);
+  salvarDados();
   $$(".resp").forEach(b=> b.setAttribute("aria-pressed", String(b.dataset.v===v)));
   atualizarProgresso();
   vibrar();
@@ -1379,7 +1484,7 @@ function calcular(respostas){
   }
   return {sim, asvezes, nao, pontos: sim*2 + asvezes};
 }
-function concluirTeste(){
+async function concluirTeste(){
   if(faltando().length){ mostrarFim(); return; }
   const r = estado.andamento.respostas;
   const c = calcular(r);
@@ -1388,8 +1493,9 @@ function concluirTeste(){
   const reg = {id:novoId(), data:new Date().toISOString(), inicio:estado.andamento.inicio, respostas:cadeia,
     pontos:c.pontos, sim:c.sim, asvezes:c.asvezes, nao:c.nao, nota:"", versaoConteudo: estado.conteudo.versaoConteudo||1};
   estado.historico.push(reg);
-  if(!LS.gravar("historico", estado.historico)){ estado.historico.pop(); return; }
-  estado.andamento = null; LS.remover("andamento");
+  const andamentoAntes = estado.andamento;
+  estado.andamento = null;
+  if(!(await salvarDados())){ estado.historico.pop(); estado.andamento = andamentoAntes; return; }
   history.replaceState(null, "", "#inicio");
   irPara("#resultado/" + reg.id + "/novo");
 }
@@ -1510,9 +1616,9 @@ function renderResultado(id, extra){
   let notaTimer = null;
   $("#notaRes").addEventListener("input", e=>{
     clearTimeout(notaTimer);
-    notaTimer = setTimeout(()=>{ reg.nota = e.target.value; LS.gravar("historico", estado.historico); }, 500);
+    notaTimer = setTimeout(()=>{ reg.nota = e.target.value; salvarDados(); }, 500);
   });
-  $("#notaRes").addEventListener("blur", e=>{ reg.nota = e.target.value; LS.gravar("historico", estado.historico); });
+  $("#notaRes").addEventListener("blur", e=>{ clearTimeout(notaTimer); if(reg.nota !== e.target.value){ reg.nota = e.target.value; salvarDados(); } });
   atualizarBotoesFoco(alvo);
   $("#btnImagem").onclick = ()=> salvarImagem(reg, false);
   $("#btnCompartilhar").onclick = ()=> salvarImagem(reg, true);
@@ -1527,7 +1633,7 @@ function renderResultado(id, extra){
   if(ex) ex.onclick = async ()=>{
     if(await confirmar("Apagar este resultado?", `O resultado de ${fmtData(reg.data)} (${reg.pontos} pontos) será removido deste aparelho.`, "Apagar", true)){
       estado.historico = estado.historico.filter(h=>h.id!==reg.id);
-      LS.gravar("historico", estado.historico);
+      salvarDados();
       toast("Resultado apagado.");
       irPara("#historico");
     }
@@ -1542,7 +1648,7 @@ function atualizarBotoesFoco(alvo){
     box.innerHTML = `<button class="link">Cultivar esta frase só por hoje</button>`;
     $("button", box).onclick = ()=>{
       estado.foco = {item:n, desde:new Date().toISOString(), dias:[]};
-      LS.gravar("foco", estado.foco);
+      salvarDados();
       vibrar();
       toast(`Frase ${n} escolhida. Ela aparece na tela inicial.`);
       atualizarBotoesFoco(alvo);
@@ -1693,12 +1799,12 @@ function renderEntenda(){
 }
 
 /* ==========================================================================
-   MAIS: instalar, dados, administração
+   MAIS: instalar, dados
    ========================================================================== */
 function renderMais(){ $("#versaoApp").textContent = `Versão ${VERSAO_APP}`; }
 function ehIOS(){ return /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1); }
 function instalado(){ return matchMedia("(display-mode: standalone)").matches || navigator.standalone===true; }
-window.addEventListener("beforeinstallprompt", e=>{ e.preventDefault(); estado.instalarEvento = e; if(estado.conteudo){ renderFaixaInstalar(); if(location.hash==="#instalar") renderInstalar(); } });
+window.addEventListener("beforeinstallprompt", e=>{ e.preventDefault(); estado.instalarEvento = e; if(estado.chave){ renderFaixaInstalar(); if(location.hash==="#instalar") renderInstalar(); } });
 window.addEventListener("appinstalled", ()=>{ estado.instalarEvento = null; LS.gravar("dicaInstalar", "ok"); toast("App instalado. Procure o ícone na tela inicial."); renderFaixaInstalar(); });
 async function pedirInstalacao(){
   if(estado.instalarEvento){
@@ -1762,11 +1868,10 @@ $("#arqImportar").addEventListener("change", async e=>{
     const ids = new Set(estado.historico.map(r=>r.id));
     const novos = validos.filter(r=>!ids.has(r.id));
     estado.historico = estado.historico.concat(novos).sort((a,b)=> new Date(a.data) - new Date(b.data));
-    LS.gravar("historico", estado.historico);
     if(!estado.foco && d.foco && Number.isInteger(d.foco.item) && d.foco.item>=1 && d.foco.item<=TOTAL){
       estado.foco = {item:d.foco.item, desde:d.foco.desde||new Date().toISOString(), dias:Array.isArray(d.foco.dias)?d.foco.dias.filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(x)):[]};
-      LS.gravar("foco", estado.foco);
     }
+    await salvarDados();
     $("#avisoDados").innerHTML = `<div class="aviso ok">Cópia restaurada: ${novos.length} ${novos.length===1?"resultado novo":"resultados novos"} incluído(s).</div>`;
   }catch(err){
     $("#avisoDados").innerHTML = `<div class="aviso erro">Este arquivo não é uma cópia de segurança deste app.</div>`;
@@ -1775,64 +1880,18 @@ $("#arqImportar").addEventListener("change", async e=>{
 $("#btnApagarTudo").addEventListener("click", async ()=>{
   if(await confirmar("Apagar todos os seus dados?", "Resultados, anotações, foco e o teste em andamento serão removidos deste aparelho. Considere salvar uma cópia antes.", "Apagar tudo", true)){
     estado.historico = []; estado.andamento = null; estado.foco = null;
-    ["historico","andamento","foco"].forEach(k=>LS.remover(k));
+    salvarDados();
     $("#avisoDados").innerHTML = `<div class="aviso ok">Dados apagados.</div>`;
     toast("Dados apagados.");
   }
 });
 $("#btnSair").addEventListener("click", async ()=>{
-  if(await confirmar("Sair do app?", "Na próxima vez será preciso digitar o login e a senha. Seus resultados continuam guardados neste aparelho.", "Sair")) sair();
+  if(await confirmar("Sair e bloquear?", "Na próxima vez será preciso digitar a sua senha. Seus resultados continuam guardados neste aparelho.", "Sair e bloquear")) sair();
 });
-
-/* Administração de acessos */
-function enderecoEdicaoCofre(){
-  const host = location.hostname;
-  if(!host.endsWith(".github.io")) return "https://github.com/";
-  const dono = host.replace(".github.io","");
-  const partes = location.pathname.split("/").filter(Boolean);
-  const primeiro = partes[0] && !/\.(html?|js)$/.test(partes[0]) ? partes[0] : null;
-  const repo = primeiro || host;
-  return `https://github.com/${dono}/${repo}/edit/main/cofre.js`;
-}
-function renderAdmin(){
-  const lista = (COFRE.acessos||[]).filter(Boolean);
-  $("#listaAcessos").innerHTML = lista.length
-    ? `<p style="margin-bottom:.4rem">${lista.length} ${lista.length===1?"acesso cadastrado":"acessos cadastrados"}:</p><ul style="margin:0;padding-left:1.2rem">${lista.map(a=>`<li>${esc(a.rotulo||"(sem identificação)")}</li>`).join("")}</ul><p class="pequeno" style="margin-top:.6rem">Por segurança, os logins e as senhas não aparecem aqui.</p>`
-    : "Nenhum acesso.";
-  $("#lnkEditarCofre").href = enderecoEdicaoCofre();
-}
-$("#formAcesso").addEventListener("submit", async e=>{
-  e.preventDefault();
-  const erro = $("#acErro"); erro.innerHTML = "";
-  const rotulo = $("#acRotulo").value.trim().replace(/["\\]/g,"").slice(0,60);
-  const login = normLogin($("#acLogin").value);
-  const senha = $("#acSenha").value;
-  if(!login){ erro.innerHTML = `<div class="aviso erro">Informe o novo login.</div>`; return; }
-  if(senha.length < 6){ erro.innerHTML = `<div class="aviso erro">A senha precisa ter pelo menos 6 caracteres.</div>`; return; }
-  if(!estado.chave){ erro.innerHTML = `<div class="aviso erro">Entre no app de novo para gerar acessos.</div>`; return; }
-  const btn = $("#btnGerarAcesso"); btn.disabled = true; btn.innerHTML = `<span class="girando" aria-hidden="true"></span> Gerando…`;
-  try{
-    const id = await idDoLogin(login);
-    const existe = (COFRE.acessos||[]).some(a=>a && a.id===id);
-    const sal = crypto.getRandomValues(new Uint8Array(16));
-    const iv = crypto.getRandomValues(new Uint8Array(12));
-    const kek = await derivarChave(login, senha, sal, COFRE.iteracoes);
-    const cifrada = new Uint8Array(await crypto.subtle.encrypt({name:"AES-GCM", iv}, kek, estado.chave));
-    const linha = JSON.stringify({rotulo: rotulo || `Acesso criado em ${fmtData(new Date().toISOString())}`, id, sal:bytesParaB64(sal), iv:bytesParaB64(iv), chave:bytesParaB64(cifrada)}) + ",";
-    $("#saidaAcesso").value = linha;
-    $("#blocoSaidaAcesso").classList.remove("oculto");
-    if(existe) erro.innerHTML = `<div class="aviso info">Este login já existe no cofre. Para trocar a senha dele, substitua a linha antiga (mesmo "id") por esta nova.</div>`;
-    $("#acSenha").value = "";
-    $("#blocoSaidaAcesso").scrollIntoView({behavior:"smooth", block:"start"});
-  }catch(err){
-    erro.innerHTML = `<div class="aviso erro">Não foi possível gerar o acesso neste navegador.</div>`;
+$("#btnApagarConta").addEventListener("click", async ()=>{
+  if(await confirmar("Apagar tudo?", "Seu login, sua senha, seus resultados e anotações serão removidos deste aparelho. Não tem como desfazer.", "Apagar tudo", true)){
+    apagarConta(); mostrarLogin(); toast("Tudo apagado deste aparelho.");
   }
-  btn.disabled = false; btn.textContent = "Gerar linha do acesso";
-});
-$("#btnCopiarAcesso").addEventListener("click", async ()=>{
-  const t = $("#saidaAcesso");
-  try{ await navigator.clipboard.writeText(t.value); toast("Linha copiada."); }
-  catch(e){ t.focus(); t.select(); toast("Selecione e copie o texto manualmente."); }
 });
 
 /* ==========================================================================
@@ -1898,11 +1957,12 @@ function iniciarApp(){
 (async function(){
   aplicarPrefs();
   registrarSW();
-  if(typeof COFRE === "undefined"){
+  if(typeof CONTEUDO === "undefined"){
     mostrarLogin();
-    $("#lgErro").innerHTML = `<div class="aviso erro">O arquivo do conteúdo (cofre.js) não carregou. Verifique a internet e abra o app de novo.</div>`;
+    $("#lgErro").innerHTML = `<div class="aviso erro">O arquivo do teste (conteudo.js) não carregou. Verifique a internet e abra o app de novo.</div>`;
     return;
   }
+  prepararConteudo();
   if(window.crypto && crypto.subtle && await tentarSessaoSalva()) iniciarApp();
   else mostrarLogin();
 })();
